@@ -1,7 +1,11 @@
 import React from 'react'
 import Rating from '@mui/material/Rating'
 import CurrencyFormat from '../CurrencyFormat/CurrencyFormat'
+import {Link} from 'react-Router'
 import styles from './Product.module.css'
+
+
+
 function ProductCard({product}) {
 
 const {image, title, id, rating, price} = product;
@@ -9,9 +13,9 @@ const {image, title, id, rating, price} = product;
 
   return (
     <div className={styles.CardWrapper}>
-      <a href="">
+     <Link to={`/products/${id}`}>
         <img src={image} alt="" />
-        </a>
+        </Link>
 
 <div>
     <h3>{title}</h3>

@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './Catagory.module.css'
 import {Link} from 'react-Router'
+
+
 function CatagoryCard({data}) {
-
-
 
   return (
     <div className={styles.catagory}>
