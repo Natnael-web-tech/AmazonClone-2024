@@ -1,12 +1,14 @@
 import React from "react";
+import { Link } from "react-Router";
 import {FaSearch} from "react-icons/fa";
-import { BiCartDownload } from "react-icons/bi";
+import { BiCart } from "react-icons/bi";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { GrLocation } from "react-icons/gr";
 import styles from "./Header.module.css";
 import AmazonLogo from '../../assets/amazon_PNG11.png'
 import USAflag from '../../assets/united-states.png'
 import LowerHeader from "./LowerHeader";
+
 const Header = () => {
   const [cartItems] = React.useState(3); // Example cart items count
 
@@ -14,9 +16,9 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.topRow}>
         <div className={styles.logoContainer}>
-          <a href="/" className={styles.logo}>
+          <Link to="/" className={styles.logo}>
             <img src={AmazonLogo} alt="Amazon" className={styles.logoImage} />
-          </a>
+          </Link>
           <div className={styles.deliveryInfo}>
             <GrLocation size="3vh" className={styles.LocationIcon} />
             <div className={styles.deliveryText}>
@@ -31,7 +33,6 @@ const Header = () => {
             <select name="" id="">
               <option>All</option>
             </select>
-
           </div>
           <input
             type="text"
@@ -55,29 +56,35 @@ const Header = () => {
             </div>
           </div>
           <div className={styles.navItem}>
-            <span className={styles.navLineOne}>Hello, Sign in</span>
-            <br />
-            <span className={styles.navLineTwo}>Account & Lists</span>
-            <TiArrowSortedDown
-              color="gray"
-              className={styles.DOwnArrowIconLists}
-            />
+            <Link className="my-Link" to="/auth">
+              <span className={styles.navLineOne}>Hello, Sign in</span>
+              <br />
+              <span className={styles.navLineTwo}>Account & Lists</span>
+              <TiArrowSortedDown
+                color="gray"
+                className={styles.DOwnArrowIconLists}
+              />
+            </Link>
           </div>
           <div className={styles.navItem}>
-            <span className={styles.navLineOne}>Returns</span>
-            <br />
-            <span className={styles.navLineTwo}>& Orders</span>
+            <Link className="my-Link" to="/orders">
+              <span className={styles.navLineOne}>Returns</span>
+              <br />
+              <span className={styles.navLineTwo}>& Orders</span>
+            </Link>
           </div>
           <div className={styles.cart}>
-            <BiCartDownload className={styles.cartIcon} />
-            <span className={styles.cartCount}>{cartItems}</span>
-            <span className={styles.cartText}>Cart</span>
+            <Link className="my-Link" to="/cart">
+              <BiCart className={styles.cartIcon} />
+              <span className={styles.cartCount}>{cartItems}</span>
+              <span className={styles.cartText}>Cart</span>
+            </Link>
           </div>
         </div>
       </div>
 
       <nav>
-      <LowerHeader/>
+        <LowerHeader />
       </nav>
     </header>
   );

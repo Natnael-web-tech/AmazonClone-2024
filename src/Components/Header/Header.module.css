@@ -145,6 +145,7 @@
   cursor: pointer;
 }
 
+
 .navItem:hover {
   outline: 1px solid white;
 }
@@ -152,11 +153,14 @@
 .navLineOne {
   font-size: 0.75rem;
   color: #cccccc;
+ 
+  
 }
 
 .navLineTwo {
   font-size: 0.9rem;
   font-weight: bold;
+  color: #cccccc;
 }
 
 .cart {
@@ -165,14 +169,19 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+ 
 }
+
 
 .cart:hover {
   outline: 1px solid white;
+  
 }
 
 .cartIcon {
   font-size: 2rem;
+  color: white;
+
 }
 
 .cartCount {
@@ -184,9 +193,12 @@
   font-size: 0.9rem;
 }
 
+
 .cartText {
-  margin-left: 5px;
+  font-size: 10px;
   font-weight: bold;
+  margin-top: 10px;
+   color: white;
 }
 
 .bottomRow ul li{
@@ -206,8 +218,15 @@
   justify-content: start;
   gap: 20px;
   font-size: 1.5vh;
+  color: white;
 }
-
+.bottomRow ul li:hover {
+  outline: 1px solid white;
+  
+}
+.bottomRow ul li .LowerSelector {
+  margin-left: -10px;
+}
 .navLink {
   color: white;
   text-decoration: none;
@@ -218,7 +237,6 @@
 .navLink:hover {
   outline: 1px solid white;
 }
-
 
 
 @media (max-width: 768px) {
