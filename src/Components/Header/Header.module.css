@@ -1,7 +1,10 @@
 .header {
   background-color: #131921;
   color: white;
-  
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0px 2px 5px rgba(8,1,0,0.8);
 }
 
 .topRow {
@@ -64,11 +67,11 @@
 .searchContainer {
   display: flex;
   flex: 1;
-  max-width: 1000px;
+  max-width: 1200px;
   height: 35px;
 }
 .searchContainer:focus-within {
-  border: 2px solid rgb(235, 161, 173);
+  outline: 4px solid rgb(235, 161, 173);
   border-radius: 10px;
 }
 .searchSelect select {
@@ -225,7 +228,7 @@
   
 }
 .bottomRow ul li .LowerSelector {
-  margin-left: -10px;
+  margin-right: -10px;
 }
 .navLink {
   color: white;
