@@ -2,7 +2,7 @@
 import React from 'react'
 import { AiOutlineMenu } from "react-icons/ai";
 import styles from './Header.module.css'
-import { Link } from "react-Router";
+import { Link } from "react-router";
 
 
 function LowerHeader() {

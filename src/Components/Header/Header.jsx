@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-Router";
+import { Link } from "react-router";
 import {FaSearch} from "react-icons/fa";
 import { BiCart } from "react-icons/bi";
 import { TiArrowSortedDown } from "react-icons/ti";

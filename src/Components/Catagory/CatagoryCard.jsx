@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Catagory.module.css'
-import {Link} from 'react-Router'
+import {Link} from 'react-router'
 
 
 function CatagoryCard({data}) {

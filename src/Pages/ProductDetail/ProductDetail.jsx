@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './ProductDetail.module.css'
 import LayOut from '../../Components/LayOut/LayOut'
-import { useParams } from "react-Router";
+import { useParams } from "react-router";
 import axios from 'axios';
 import { productUrl } from '../../Api/EndPoints';
 import ProductCard from '../../Components/product/ProductCard';
@@ -27,15 +27,12 @@ setIsLoading(false);
 
   return (
     <LayOut>
-      <div
-        style={{
-          padding: "40px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {isLoading ? <Loader /> : <ProductCard product={productDetail} />}
+      <div>
+        {isLoading ? <Loader /> : <ProductCard
+         product={productDetail} 
+        flex = {true}
+        renderDesc= {true}
+        />}
       </div>
    
     </LayOut>

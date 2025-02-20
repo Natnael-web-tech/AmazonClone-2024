@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Results.module.css'
 import LayOut from '../../Components/LayOut/LayOut'
-import {useParams} from 'react-Router'
+import {useParams} from 'react-router'
 import axios from 'axios'
 import { productUrl } from '../../Api/EndPoints'
 import styles from './Results.module.css'
