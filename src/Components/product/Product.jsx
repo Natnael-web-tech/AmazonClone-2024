@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import ProductCard from './ProductCard'
 import styles from './Product.module.css'
-import Loader from '../Loader/Loader'
+// import Loader from '../Loader/Loader'
+import CustomLoader from '../Loader/CustomLoader'
 
 
 function Product() {
@@ -26,11 +27,16 @@ setIsLoading(true);
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <CustomLoader />
       ) : (
         <section className={styles.products}>
           {products.map((singleProduct) => (
-            <ProductCard key={singleProduct.id} product={singleProduct} />
+            <ProductCard
+             key={singleProduct.id}
+              product={singleProduct} 
+              renderAddCart={true}
+              
+              />
           ))}
         </section>
       )}

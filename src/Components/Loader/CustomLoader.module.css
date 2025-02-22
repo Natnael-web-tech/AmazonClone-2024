@@ -1,0 +1,54 @@
+/* .loader_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+}
+
+.spinning_zooming_logo {
+  width: 150px;
+  height: auto;
+  animation: spinZoom 2s ease-in-out infinite;
+}
+
+@keyframes spinZoom {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(-180deg) scale(1.8); }
+  100% { transform: rotate(360deg) scale(1); }
+} */
+
+
+
+.fade_text {
+  font-size: 3rem; /* Make text bigger */
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Space between words */
+  height: 100vh; /* Center vertically */
+}
+
+.word {
+  opacity: 0;
+  animation: fadeWords 4s infinite;
+}
+
+.word1 {
+  animation-delay: 0s; /* First word starts first */
+  color: rgb(246, 199, 11);
+}
+
+.word2 {
+  animation-delay: 0.4s; /* Second word starts after first fades */
+    color: rgb(246, 199, 11);
+}
+
+@keyframes fadeWords {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  50% { opacity: 1; }
+  70% { opacity: 0; }
+  100% { opacity: 0; }
+}

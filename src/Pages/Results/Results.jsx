@@ -6,7 +6,9 @@ import axios from 'axios'
 import { productUrl } from '../../Api/EndPoints'
 import styles from './Results.module.css'
 import ProductCard from '../../Components/product/ProductCard'
-import Loader from '../../Components/Loader/Loader'
+import CustomLoader from '../../Components/Loader/CustomLoader'
+
+// import Loader from '../../Components/Loader/Loader'
 function Results() {
 const [results, setResults] = useState([])
 const [isLoading, setIsLoading] = useState(false)
@@ -34,11 +36,17 @@ axios.get(`${productUrl}/products/category/${categoryName}`).then((res) => {
         <hr />
 
         {isLoading ? (
-          <Loader />
+          <CustomLoader/>
         ) : (
           <div className={styles.products_container}>
             {results?.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard 
+              key={product.id} 
+              product={product} 
+              renderDesc={false}
+              renderAddCart={true}
+              
+              />
             ))}
           </div>
         )}

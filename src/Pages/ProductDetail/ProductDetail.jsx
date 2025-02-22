@@ -5,7 +5,9 @@ import { useParams } from "react-router";
 import axios from 'axios';
 import { productUrl } from '../../Api/EndPoints';
 import ProductCard from '../../Components/product/ProductCard';
-import Loader from '../../Components/Loader/Loader';
+import CustomLoader from '../../Components/Loader/CustomLoader';
+// import Loader from '../../Components/Loader/Loader';
+
 function ProductDetail() {
 
 const [productDetail, useProductDetail] = useState({})
@@ -28,13 +30,18 @@ setIsLoading(false);
   return (
     <LayOut>
       <div>
-        {isLoading ? <Loader /> : <ProductCard
-         product={productDetail} 
-        flex = {true}
-        renderDesc= {true}
-        />}
+        {isLoading ? (
+          <CustomLoader />
+        ) : (
+          <ProductCard
+            product={productDetail}
+            flex={true}
+            renderDesc={true}
+            renderTruncate={true}
+            renderAddCart={true}
+          />
+        )}
       </div>
-   
     </LayOut>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router";
 import {FaSearch} from "react-icons/fa";
 import { BiCart } from "react-icons/bi";
@@ -8,9 +8,10 @@ import styles from "./Header.module.css";
 import AmazonLogo from '../../assets/amazon_PNG11.png'
 import USAflag from '../../assets/united-states.png'
 import LowerHeader from "./LowerHeader";
+import { DataContext } from "../DataProvider/DataProvider";
 
 const Header = () => {
-  const [cartItems] = React.useState(3); // Example cart items count
+  const [{ basket }, dispatch] = useContext(DataContext);
 
   return (
     <header className={styles.header}>
@@ -76,7 +77,7 @@ const Header = () => {
           <div className={styles.cart}>
             <Link className="my-Link" to="/cart">
               <BiCart className={styles.cartIcon} />
-              <span className={styles.cartCount}>{cartItems}</span>
+              <span className={styles.cartCount}>{basket.length}</span>
               <span className={styles.cartText}>Cart</span>
             </Link>
           </div>
