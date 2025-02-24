@@ -1,60 +1,81 @@
-import React, { useContext } from 'react'
-import './Cart.module.css'
-import LayOut from '../../Components/LayOut/LayOut'
-import { DataContext } from '../../Components/DataProvider/DataProvider'
-import ProductCard from '../../Components/product/ProductCard'
-import CurrencyFormat from '../../Components/CurrencyFormat/CurrencyFormat'
-import { Link } from 'react-router'
+import styles from "./cart.module.css";
+import { useContext } from "react";
+import { DataContext } from "../../components/DataProvider/DataProvider";
+import Layout from '../../Components/LayOut/LayOut';
+import ProductCard from '../../Components/product/ProductCard';
+import { Link } from "react-router";
+import CurrencyFormat from "../../Components/CurrencyFormat/CurrencyFormat";
+import { Type } from "../../Utility/action.type.js";
+import { IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 
-function Cart() {
+const Cart = () => {
+  const [{ basket, user }, dispatch] = useContext(DataContext);
 
-const [{basket,user}, dispatch] = useContext(DataContext)
+  const total = basket.reduce((amount, item) => {
+    return item.price * item.amount + amount;
+  }, 0);
+
+  const increment = (item) =>
+    dispatch({
+      type: Type.ADD_TO_BASKET,
+      item,
+    });
+    
+  const decrement = (id) =>
+    dispatch({
+      type: Type.REMOVE_FROM_BASKET,
+      id,
+    });
 
   return (
-    <LayOut>
-      <section>
-        <div>
+    <Layout>
+      <div className={styles.container}>
+        <div className={styles.cart_container}>
           <h2>Hello</h2>
-          <h3>your shopping basket</h3>
+          <h3>Your shopping basket</h3>
           <hr />
-
           {basket?.length == 0 ? (
-            <p>you have no item in your cart </p>
+            <p>Oops! No item in your cart</p>
           ) : (
-            basket?.map((item, index) => {
-              return (
+            basket?.map((item, index) => (
+              <div key={index} className={styles.cart_product}>
                 <ProductCard
                   key={index}
                   product={item}
                   renderDesc={true}
                   flex={true}
-                  renderTruncate={true}
-                  renderAddCart={false}
+                  renderAdd={false}
                 />
-              );
-            })
-          )}
-        </div>
-
-        <div>
-          {basket?.length !== 0 && (
-            <div>
-              <div>
-                <p>subtotal ({basket?.length} items) </p>
-                <CurrencyFormat amount="total" />
+                <div className={styles.btn_container}>
+                  <button onClick={() => increment(item)}>
+                    <IoIosArrowUp size={20} />
+                  </button>
+                  <span>{item.amount}</span>
+                  <button onClick={() => decrement(item.id)}>
+                    <IoIosArrowDown size={20} />
+                  </button>
+                </div>
               </div>
-              <span>
-                <input type="checkbox" name="" id="" />
-
-                <small>This order contains a gift</small>
-              </span>
-              <Link to="/payments">Continue to Checkout</Link>
-            </div>
+            ))
           )}
         </div>
-      </section>
-    </LayOut>
+        {basket?.length !== 0 && (
+          <div className={styles.subtotal}>
+            <div>
+              <p>Subtotal ({basket?.length} items)</p>
+              <CurrencyFormat amount={total} />
+            </div>
+            <span>
+              <input type="checkbox" />
+              <small>This order contains a gift</small>
+            </span>
+            <Link to="/payments">Continue to checkout</Link>
+          </div>
+        )}
+      </div>
+    </Layout>
   );
-}
+};
 
-export default Cart
+export default Cart;
