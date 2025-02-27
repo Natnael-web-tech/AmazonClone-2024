@@ -9,9 +9,10 @@ import AmazonLogo from '../../assets/amazon_PNG11.png'
 import USAflag from '../../assets/united-states.png'
 import LowerHeader from "./LowerHeader";
 import { DataContext } from "../DataProvider/DataProvider";
+import { auth } from "../../Utility/Firebase";
 
 const Header = () => {
-  const [{ basket }, dispatch] = useContext(DataContext);
+  const [{ user, basket }, dispatch] = useContext(DataContext);
 const totalItem = basket?.reduce((amount,item)=> (
   item.amount + amount
 ), 0)
@@ -59,14 +60,24 @@ const totalItem = basket?.reduce((amount,item)=> (
             </div>
           </div>
           <div className={styles.navItem}>
-            <Link className="my-Link" to="/auth">
-              <span className={styles.navLineOne}>Hello, Sign in</span>
-              <br />
-              <span className={styles.navLineTwo}>Account & Lists</span>
-              <TiArrowSortedDown
-                color="gray"
-                className={styles.DOwnArrowIconLists}
-              />
+            <Link className="my-Link" to={!user && "/auth"}>
+              <div className={styles.navLineOne}>
+                {user ? (
+                  <>
+                    <p>Hello {user?.email?.split("@")[0]}</p>
+                       <span onClick={()=>auth.signOut()}>SignOut</span>
+                  </>
+                ) : (
+                  <>
+                    <p>Hello, Sign In</p>
+                    <span className={styles.navLineTwo}>Account & Lists</span>
+                    <TiArrowSortedDown
+                      color="gray"
+                      className={styles.DOwnArrowIconLists}
+                    />
+                  </>
+                )}
+              </div>
             </Link>
           </div>
           <div className={styles.navItem}>

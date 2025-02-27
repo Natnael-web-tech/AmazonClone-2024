@@ -1,0 +1,85 @@
+.AuthContainner {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.AuthContainner img{
+    margin: 10px auto;
+    object-fit: contain;
+    width: 100px;
+}
+
+.formContainner {
+    outline: 1px solid lightgray;
+    padding: 20px;
+   box-shadow: 2px gray;
+   border-radius: 5px;
+   display: flex;
+   flex-direction: column;
+width: 250px;
+}
+
+.formContainner h1 {
+    padding-bottom: 20px;
+}
+
+.form {
+  display: flex;
+ justify-content: space-between ;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form div{
+  display: flex;
+ justify-content: space-between ;
+  flex-direction: column;
+}
+
+.formContainner .form input {
+    border: none;
+    border: 1px solid gray;
+     border-radius: 4px;
+     margin-bottom: 10px;
+    padding: 8px;
+    width: 100%;
+    background-color: #fbf9f9;
+   
+}
+.formContainner .form input:focus {
+outline: 2px solid skyblue;
+background-color: #fff;
+}
+
+
+.formContainner .form button {
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+    background-color: var(--primary-color);
+    cursor: pointer;
+}
+
+.formContainner .form button:hover {
+    background-color: var(--primary-shade);
+    
+}
+
+.formContainner p {
+    padding: 10px 0px;
+    font-size: 11px;
+}
+
+.formContainner button {
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.formContainner button:hover {
+    background-color: rgb(210, 209, 207);
+    
+}
