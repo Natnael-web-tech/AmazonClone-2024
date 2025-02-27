@@ -1,0 +1,77 @@
+.paymentHeader {
+    padding: 20px;
+    text-align-last: center;
+    font-size: 24px;
+    background-color: rgb(243, 243, 243);
+}
+
+.paymentHeader {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.totalItem {
+  color: var(--primary-color);
+  background-color: #615e5e;
+  font-weight: bold; 
+  font-size: 25px;  
+  border: 1px solid black;
+  border-width: 1.5px;
+  position: relative;
+  padding-inline: 5px;
+ 
+}
+
+
+.payment {
+    padding: 40px;
+}
+
+.flex {
+  padding: 30px;
+  display: flex;
+  gap: 20px;  
+}
+.flex h3{
+min-width: 300px;
+}
+.flex div {
+    height: auto !important;
+}
+.flex img {
+    
+    width: 80px !important;
+}
+
+.cardContainer {
+    max-width: 350px;
+    width: 100%;
+}
+
+.paymentDetails {
+    font-size: 20px;
+}
+
+.paymentPrice {
+    padding: 20px;
+}
+
+.paymentPrice div span{
+display: flex;
+font-size: 16px;
+gap: 10px;
+}
+
+.paymentPrice button{
+margin-top: 15px;
+width: 100%;
+border: none;
+background-color: var(--primary-color);
+border-radius: 5px;
+padding: 8px 10px;
+cursor: pointer;
+}
+
+.paymentPrice button:hover {
+    background-color: var(--primary-shade);
+}
