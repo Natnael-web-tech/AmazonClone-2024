@@ -75,3 +75,17 @@ cursor: pointer;
 .paymentPrice button:hover {
     background-color: var(--primary-shade);
 }
+
+.payLoader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    color: rgb(46, 44, 44);
+}
+
+@media screen and (max-width: 768px) {
+    .flex {
+        flex-direction: column;
+    }
+}

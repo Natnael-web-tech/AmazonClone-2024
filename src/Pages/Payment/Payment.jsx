@@ -10,15 +10,15 @@ import {
   CardElement
 } from "@stripe/react-stripe-js";
 import CurrencyFormat from '../../Components/CurrencyFormat/CurrencyFormat'
-
-
-
+import { axiosInstance } from '../../Api/axios'
+import { ClipLoader } from "react-spinners";
+import { db } from '../../Utility/Firebase'
 function Payment() {
 const stripe = useStripe();
 const elements = useElements();
 const [cardError, setCardError] = useState(null)
   const [{user, basket}] = useContext(DataContext);
-
+const [payProcess, setPayProcess] = useState(false);
 const totalItem = basket?.reduce((amount, item) => item.amount + amount, 0);
 
  const total = basket.reduce((amount, item) => {
@@ -30,6 +30,45 @@ const handleChange= (e) => {
 e?.error?.message? setCardError(e?.error?.message): setCardError('')
 }
 
+const handlePayment = async (e) => {
+  e.preventDefault()
+
+ try {
+
+  setPayProcess(true);
+const response = await axiosInstance({
+  method: "POST",
+  url: `/payment/create?total=${total*100}`,
+});
+
+// console.log(response.data)
+  const clientSecret = response.data?.clientSecret;
+
+const {paymentIntent} = await stripe.confirmCardPayment(
+
+clientSecret,
+
+{
+  payment_method:{
+  card: elements.getElement(CardElement)
+},
+});
+
+// console.log(paymentIntent);
+
+
+
+
+
+setPayProcess(false)
+
+ } catch (error) {
+  
+console.log(error)
+setPayProcess(false);
+ }
+  
+};
 
   return (
     <LayOut>
@@ -62,20 +101,30 @@ e?.error?.message? setCardError(e?.error?.message): setCardError('')
           <h3>Payment methods</h3>
           <div className={styles.cardContainer}>
             <div className={styles.paymentDetails}>
-              <form action="">
-                {cardError && <small style={{color: "red"}} >{cardError}</small>}
-<CardElement onChange={handleChange}/>
+              <form onSubmit={handlePayment}>
+                {cardError && (
+                  <small style={{ color: "red" }}>{cardError}</small>
+                )}
+                <CardElement onChange={handleChange} />
 
-<div className={styles.paymentPrice} >
-  <div>
-    <span>
-      Total Order | <CurrencyFormat amount={total}/>
-    </span>
-  </div>
+                <div className={styles.paymentPrice}>
+                  <div>
+                    <span>
+                      Total Order | <CurrencyFormat amount={total} />
+                    </span>
+                  </div>
 
-<button>Pay Now</button>
-
-</div>
+                  <button type="submit">
+                    {payProcess ? (
+                      <div className={styles.payLoader}>
+                        <ClipLoader color='gray' size={12}/>
+                        <p>please wait ...</p>
+                      </div>
+                    ) : (
+                      "Pay Now"
+                    )}
+                  </button>
+                </div>
               </form>
             </div>
           </div>
