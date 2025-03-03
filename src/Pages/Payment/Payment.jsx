@@ -12,10 +12,13 @@ import {
 import CurrencyFormat from '../../Components/CurrencyFormat/CurrencyFormat'
 import { axiosInstance } from '../../Api/axios'
 import { ClipLoader } from "react-spinners";
-import { db } from '../../Utility/Firebase'
+import { db } from '../../Utility/Firebase';
+import { doc, collection, setDoc } from "firebase/firestore";
+import { useNavigate } from 'react-router'
 function Payment() {
 const stripe = useStripe();
 const elements = useElements();
+const navigate = useNavigate();
 const [cardError, setCardError] = useState(null)
   const [{user, basket}] = useContext(DataContext);
 const [payProcess, setPayProcess] = useState(false);
@@ -54,13 +57,21 @@ clientSecret,
 },
 });
 
-// console.log(paymentIntent);
+console.log(paymentIntent);
 
-
+await setDoc(
+  doc(collection(db, "users"), user.uid, "orders", paymentIntent.id),
+  {
+    basket: basket,
+    amount: paymentIntent.amount,
+    created: paymentIntent.created,
+  });
 
 
 
 setPayProcess(false)
+
+navigate('/orders', {state: {msg: 'you have placed new Order'}})
 
  } catch (error) {
   
@@ -90,8 +101,8 @@ setPayProcess(false);
         <div className={styles.flex}>
           <h3>Review items and delivery</h3>
           <div>
-            {basket?.map((item) => (
-              <ProductCard product={item} flex={true} />
+            {basket?.map((item, index) => (
+              <ProductCard key = {index} product={item} flex={true} />
             ))}
           </div>
         </div>
