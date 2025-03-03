@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import styles from './Auth.module.css'
-import { Link, useNavigate } from 'react-router'
+import { Link, useNavigate, useLocation } from 'react-router'
 import AuthLogo from './asset/amazon_logo_Auth.png'
 import { auth } from '../../Utility/Firebase'
 import {signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth"
@@ -21,7 +21,7 @@ const [loading, setLoading] = useState({
 });
 
 const navigate = useNavigate()
-
+const navData = useLocation()
 // console.log(password, email);
 
 
@@ -41,7 +41,7 @@ signInWithEmailAndPassword(auth, email, password).then((userInfo)=>{
     user: userInfo.user,
   })
   setLoading({...loading, signIn:false});
-  navigate('/')
+  navigate(navData?.state?.redirect || '/');
 }).catch((err)=>{
   console.log(err)
   setError(err.message)
@@ -71,12 +71,24 @@ dispatch({
   return (
     <>
       <section className={styles.AuthContainner}>
-        <Link to='/'>
+        <Link to="/">
           <img src={AuthLogo} alt="" />
         </Link>
 
         <div className={styles.formContainner}>
           <h1>Sign In</h1>
+          {navData?.state?.msg && (
+            <small
+              style={{
+                padding: "5px",
+                textAlign: "center",
+                color: "red",
+                fontWeight: "bold",
+              }}
+            >
+              {navData?.state?.msg}
+            </small>
+          )}
           <form className={styles.form} action="">
             <div className={styles.email}>
               <label htmlFor="email">Email</label>
@@ -99,9 +111,7 @@ dispatch({
               />
             </div>
 
-            <button type="submit" 
-            name="signin" 
-            onClick={authHundler}>
+            <button type="submit" name="signin" onClick={authHundler}>
               {loading.signIn ? (
                 <ClipLoader color="#fff" size={15}></ClipLoader>
               ) : (
@@ -116,9 +126,7 @@ dispatch({
             Interest-Based Ads Notice.{" "}
           </p>
 
-          <button type="submit" 
-          name="signup" 
-          onClick={authHundler}>
+          <button type="submit" name="signup" onClick={authHundler}>
             {loading.signUp ? (
               <ClipLoader color="#fff" size={15}></ClipLoader>
             ) : (
