@@ -27,6 +27,7 @@ color: Orgb(35, 35, 35);
 .catagory p {
 padding: 5px;
 margin-left: 15px;
+color: black;
 }
 
 .catagory p {
@@ -38,6 +39,10 @@ color: rgba(9,132,209);
     position: relative;
     margin-top: -10%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    place-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(350px,1fr));
+    max-width: 1800px;
+    gap: 5px;
+    margin-right: auto;
+    margin-left: auto;
+      place-items: center;
 }
